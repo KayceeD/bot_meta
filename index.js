@@ -26,7 +26,7 @@ app.get('/',(req,res) => {
 
 //get webhook
 app.get('/webhook',(req,res) => {
-
+    res.send('webhookpage');
 })
 
 //running app
