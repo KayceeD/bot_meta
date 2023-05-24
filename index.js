@@ -47,6 +47,12 @@ app.post('/webhook',(req,res) => {
     
     console.log(`\u{1F7EA} Received webhook:`);
     console.dir(body, {depth : null});
+
+    if(body.object === "page"){
+        res.status(200).send("event_received");
+    } else {
+        res.sendStatus(404);
+    }
 })
 
 //running app
