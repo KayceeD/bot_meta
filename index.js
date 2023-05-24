@@ -40,6 +40,13 @@ app.get('/webhook',(req,res) => {
             res.sendStatus(403);
         }
     }
+});
+
+app.post('/webhook',(req,res) => {
+    let body = req.body;
+    
+    console.log(`\u{1F7EA} Received webhook:`);
+    console.dir(body, {depth : null});
 })
 
 //running app
