@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const ejs = require('ejs')
 
+
 const app = express()
 
 //bodyparser
@@ -50,6 +51,14 @@ app.post('/webhook',(req,res) => {
         body.entry.forEach(entry => {
             let webhookEvent = entry.messaging[0];
             console.log(webhookEvent);
+
+            let senderPsid = webhookEvent.sender.id;
+            console.log(`Sender PSID: ${senderPsid}`);
+
+            if(webhookEvent.message){
+                handleMessage(senderPsid,webhookEvent.message);
+            }
+
         });
         res.status(200).send('event received');
     } else {
@@ -57,7 +66,39 @@ app.post('/webhook',(req,res) => {
     }
 });
 
+const handleMessage = (sender_psid, received_message) => {
+    let response;
 
+    if (received_message.text) {
+        response = {
+            'text':`You sent the message: ${received_message.text}`
+        }
+    }
+}
+
+const callSendAPI = (sender_psid, response) => {
+    const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
+    let requestBody = {
+        'recipient': {
+            'id': sender_psid
+        },
+        'message': response
+    }
+
+    request({
+        'uri': 'https://graph.facebook.com/v2.6/me/messages',
+        'qs': { 'access_token': PAGE_ACCESS_TOKEN },
+        'method': 'POST',
+        'json': requestBody
+    }, (err, _res, _body) => {
+        if (!err) {
+          console.log('Message sent!');
+        } else {
+          console.error('Unable to send message:' + err);
+        }
+    });
+}
 
 //running app
 app.listen(process.env.PORT,() => {
