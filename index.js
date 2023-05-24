@@ -44,14 +44,12 @@ app.get('/webhook',(req,res) => {
 
 app.post('/webhook',(req,res) => {
     let body = req.body;
-    
-    console.log(`\u{1F7EA} Received webhook:`);
-    console.dir(body, {depth : null});
+
 
     if(body.object === "page"){
-        body.entry.forEach((entry) => {
-            let webhook_event = entry.messaging[0];
-            console.log(webhook_event);
+        body.entry.forEach(entry => {
+            let webhookEvent = entry.messaging[0];
+            console.log(webhookEvent);
         });
         res.status(200).send('event received');
     } else {
