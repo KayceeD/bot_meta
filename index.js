@@ -74,6 +74,7 @@ const handleMessage = (sender_psid, received_message) => {
             'text':`You sent the message: ${received_message.text}`
         }
     }
+    callSendAPI(sender_psid,response);
 }
 
 const callSendAPI = (sender_psid, response) => {
