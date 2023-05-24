@@ -49,11 +49,17 @@ app.post('/webhook',(req,res) => {
     console.dir(body, {depth : null});
 
     if(body.object === "page"){
-        res.status(200).send("event_received");
+        body.entry.forEach((entry) => {
+            let webhook_event = entry.messaging[0];
+            console.log(webhook_event);
+        });
+        res.status(200).send('event received');
     } else {
         res.sendStatus(404);
     }
-})
+});
+
+
 
 //running app
 app.listen(process.env.PORT,() => {
