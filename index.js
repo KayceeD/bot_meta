@@ -66,7 +66,7 @@ const handleMessage = (sender_psid, received_message) => {
 
     if (received_message.text) {
         if(received_message.text === "Time"){
-            time = new Date().toLocaleTimeString();
+            const time = new Date().toLocaleTimeString();
             response = {
                 'text':`${time}`
             }
