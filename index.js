@@ -18,7 +18,7 @@ app.get('/',(req,res) => {
     res.send('Server is running');
 });
 
-//get webhook
+//auth webhook
 app.get('/webhook',(req,res) => {
     let VERIFY_TOKEN = process.env.VERIFY_TOKEN
     
@@ -60,10 +60,17 @@ app.post('/webhook',(req,res) => {
     }
 });
 
+//Send response to sender
 const handleMessage = (sender_psid, received_message) => {
     let response;
 
     if (received_message.text) {
+        if(received_message.text === "Time"){
+            time = new Date().toLocaleTimeString();
+            response = {
+                text:time
+            }
+        }else
         response = {
             'text':`You sent the message: ${received_message.text}`
         }
@@ -71,6 +78,7 @@ const handleMessage = (sender_psid, received_message) => {
     callSendAPI(sender_psid,response);
 }
 
+//Post to API facebook
 const callSendAPI = (sender_psid, response) => {
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
