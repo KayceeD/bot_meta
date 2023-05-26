@@ -1,7 +1,6 @@
 'use strict'
 const express = require('express')
 const bodyParser = require('body-parser');
-const ejs = require('ejs')
 const request = require('request')
 
 
@@ -13,17 +12,10 @@ app.use(bodyParser.urlencoded(
 ));
 app.use(bodyParser.json());
 
-//using template engine
-app.set('views');
-app.set('view engine','ejs');
-
-//static file
-app.use('/public',express.static(__dirname+'/public'));
-
 
 //get home
 app.get('/',(req,res) => {
-    res.render('index');
+    res.send('Server is running');
 });
 
 //get webhook
@@ -43,6 +35,7 @@ app.get('/webhook',(req,res) => {
         }
     }
 });
+
 
 app.post('/webhook',(req,res) => {
     let body = req.body;
