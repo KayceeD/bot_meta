@@ -66,10 +66,10 @@ const handleMessage = (sender_psid, received_message) => {
 
     if (received_message.text) {
         if(received_message.text === "Time"){
-            const time = new Date().toLocaleTimeString("id-ID");
             response = {
-                'text':`${time}`
+                'text':'Test time'
             }
+            handleTime();
         }else
         response = {
             'text':`You sent the message: ${received_message.text}`
@@ -102,6 +102,32 @@ const callSendAPI = (sender_psid, response) => {
         }
     });
 }
+
+
+const handleTime = () =>{
+    const date = new Date();
+
+    let hour = date.getUTCHours()+7;
+    let minute = date.getUTCMinutes()+7;
+    let amPm = '';
+    
+    if(hour >= 12){
+        amPm = "AM";
+    }else {
+        amPm = "PM";
+    }
+    
+    if(hour == 0){
+        hour = 12;
+    } else {
+        if(hour > 12){
+            hour -= 12;
+        }
+    }
+
+    console.log(`Now,Time is ${hour}:${minute} ${amPm}`);
+}
+
 
 //running app
 app.listen(process.env.PORT,() => {
