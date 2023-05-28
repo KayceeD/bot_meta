@@ -66,10 +66,11 @@ const handleMessage = (sender_psid, received_message) => {
 
     if (received_message.text) {
         if(received_message.text === "Time"){
+            const d = new Date();
+            formatTime(d);
             response = {
-                'text':'Test time'
+                'text': `${formatTime}`
             }
-            handleTime();
         }else
         response = {
             'text':`You sent the message: ${received_message.text}`
@@ -104,29 +105,20 @@ const callSendAPI = (sender_psid, response) => {
 }
 
 
-const handleTime = () =>{
-    const date = new Date();
+const formatTime = (date) => {
+    let hours = date.getUTCHours()+7;
+    let minutes = date.getUTCMinutes();
 
-    let hour = date.getUTCHours()+7;
-    let minute = date.getUTCMinutes()+7;
-    let amPm = '';
+    let ampm = hours >=12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12 //the hour '0' should be 12
+    minutes = minutes < 10 ? '0' + minutes : minutes;
     
-    if(hour >= 12){
-        amPm = "AM";
-    }else {
-        amPm = "PM";
-    }
+    const timeStr = `${hours} : ${minutes} ${ampm}`
     
-    if(hour == 0){
-        hour = 12;
-    } else {
-        if(hour > 12){
-            hour -= 12;
-        }
-    }
-
-    console.log(`Now,Time is ${hour}:${minute} ${amPm}`);
+    return timeStr
 }
+
 
 
 //running app
