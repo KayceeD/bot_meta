@@ -113,7 +113,9 @@ const handleTime = (date) => {
     hours = hours ? hours : 12 //the hour '0' should be 12
     minutes = minutes < 10 ? '0' + minutes : minutes;
     
-    return timeStr = `${hours} : ${minutes} ${ampm}`
+    const timeStr = `${hours} : ${minutes} ${ampm}`
+
+    return timeStr
 }
 
 
