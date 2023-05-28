@@ -3,6 +3,8 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const request = require('request')
 
+const Time = require('./utils/Time')
+
 
 const app = express()
 
@@ -66,7 +68,7 @@ const handleMessage = (sender_psid, received_message) => {
 
     if (received_message.text) {
         if(received_message.text === "Time"){
-            const dataTime = handleTime(new Date());
+            const dataTime = Time.handleTime(new Date());
             response = {
                 'text': `${dataTime}`
             }
@@ -101,21 +103,6 @@ const callSendAPI = (sender_psid, response) => {
           console.error('Unable to send message:' + err);
         }
     });
-}
-
-
-const handleTime = (date) => {
-    let hours = date.getUTCHours()+7;
-    let minutes = date.getUTCMinutes();
-
-    let ampm = hours >=12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12 //the hour '0' should be 12
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    
-    const timeStr = `${hours} : ${minutes} ${ampm}`
-
-    return timeStr
 }
 
 
