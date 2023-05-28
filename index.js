@@ -66,10 +66,9 @@ const handleMessage = (sender_psid, received_message) => {
 
     if (received_message.text) {
         if(received_message.text === "Time"){
-            const d = new Date();
-            formatTime(d);
+            const dataTime = handleTime(new Date());
             response = {
-                'text': `${formatTime}`
+                'text': `${dataTime}`
             }
         }else
         response = {
@@ -105,18 +104,16 @@ const callSendAPI = (sender_psid, response) => {
 }
 
 
-const formatTime = (date) => {
+const handleTime = (date) => {
     let hours = date.getUTCHours()+7;
     let minutes = date.getUTCMinutes();
 
-    let ampm = hours >=12 ? 'pm' : 'am';
+    let ampm = hours >=12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12 //the hour '0' should be 12
     minutes = minutes < 10 ? '0' + minutes : minutes;
     
-    const timeStr = `${hours} : ${minutes} ${ampm}`
-    
-    return timeStr
+    return timeStr = `${hours} : ${minutes} ${ampm}`
 }
 
 
