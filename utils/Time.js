@@ -1,4 +1,4 @@
-const handleTime = (date) => {
+const handleTime = (date = new Date()) => {
     let hours = date.getUTCHours()+7;
     let minutes = date.getUTCMinutes();
 
@@ -11,6 +11,9 @@ const handleTime = (date) => {
 
     return timeStr
 }
+
+
+
 
 module.exports = {
     handleTime
