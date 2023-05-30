@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const request = require('request')
 
 const Time = require('./utils/Time')
+const Weather = require('./utils/Weather');
 
 
 const app = express()
@@ -68,9 +69,14 @@ const handleMessage = (sender_psid, received_message) => {
 
     if (received_message.text) {
         if(received_message.text === "Time"){
-            const dataTime = Time.handleTime(new Date());
+            const dataTime = Time.handleTime();
             response = {
                 'text': `${dataTime}`
+            }
+        }else if(received_message.text === "Weather"){
+            const dataWeather = Weather.getWeather();
+            response = {
+                'text': `${dataWeather}`
             }
         }else
         response = {
