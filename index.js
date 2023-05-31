@@ -81,7 +81,7 @@ const handleMessage = (sender_psid, received_message) => {
                     'text':`${x}`
                   }
                 } catch (error) {
-                  console.log("Error")
+                  console.log(error.message)
                 }
               })();
         }else
