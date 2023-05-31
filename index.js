@@ -76,7 +76,7 @@ const handleMessage = (sender_psid, received_message) => {
         }else if(received_message.text === "Weather"){
             (async () => {
                 try {
-                    const x = Weather.getWeather();
+                    const x = await Weather.getWeather();
                   response = {
                     'text':`${x}`
                   }
