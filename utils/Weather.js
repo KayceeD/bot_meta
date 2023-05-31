@@ -1,4 +1,4 @@
-const getWeather = async () => {
+const getWeather = async() => {
     const apiURL = process.env.WEATHER_API_URL;
 
     const data = await fetch(apiURL).then(res => res.json());
@@ -10,9 +10,6 @@ const getWeather = async () => {
 
 
     const weatherStr = `Bây giờ nhiệt độ Hà Nội là ${temp} (cảm giác như ${tempFeellike}).Độ ẩm hiện tại là ${humidity},Tầm nhìn hiện tại là ${visibility}`;
-    
-    
-    return weatherStr
 }
 
 module.exports = {
