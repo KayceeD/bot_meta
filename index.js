@@ -75,16 +75,17 @@ const handleMessage = (sender_psid, received_message) => {
                 'text': `${dataTime}`
             }
         }else if(received_message.text === "Weather"){
-            (async () => {
+            (az=async () => {
                 try {
                     const x = await Weather.getWeather();
-                  response = {
-                    'text':`${x}`
-                  }
+                    return x;
                 } catch (error) {
                   console.log(error.message)
                 }
               })();
+              response = {
+                'text': az()
+              }
         }else
         response = {
             'text':`You sent the message: ${received_message.text}`
