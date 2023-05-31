@@ -1,7 +1,9 @@
+const axios = require('axios');
+
 const getWeather = async() => {
     const apiURL = process.env.WEATHER_API_URL;
 
-    const data = await fetch(apiURL).then(res => res.json());
+    const data = await axios.get(apiURL).then(res => res.json());
 
     const temp = data.main.temp + '℃'
     const tempFeellike = data.main.feels_like + '℃'
