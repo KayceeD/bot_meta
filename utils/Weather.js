@@ -10,6 +10,7 @@ const getWeather = async() => {
 
 
     const weatherStr = `Bây giờ nhiệt độ Hà Nội là ${temp} (cảm giác như ${tempFeellike}).Độ ẩm hiện tại là ${humidity},Tầm nhìn hiện tại là ${visibility}`;
+    return weatherStr
 }
 
 module.exports = {
